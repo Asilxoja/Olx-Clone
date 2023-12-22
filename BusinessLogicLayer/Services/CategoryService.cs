@@ -81,7 +81,7 @@ public class CategoryService (IUnitOfWork unitOfWork,
         if (categoryDto is null)
         {
             throw new ArgumentNullException("Category null bo'lib qoldi!");
-        }
+        }       
         var categories = await _unitOfWork.CategoryInterface.GetAllAsync();
         var category = categories.FirstOrDefault(c => c.Id == categoryDto.Id);
 

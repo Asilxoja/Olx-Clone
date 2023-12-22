@@ -1,15 +1,16 @@
 ﻿using BusinessLogicLayer.Extended;
 using BusinessLogicLayer.Interfaces;
 using DTO.DTOs.CategoryDtos;
+using DTO.DTOs.SubCategoryDtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace PresentationLayers.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class CategoryController(ICategoryService categoryService) : ControllerBase
+public class SubCategoryController(ISubSubCategoryService subcategoryService) : ControllerBase
 {
-    private readonly ICategoryService _categoryService = categoryService;
+    private readonly ISubSubCategoryService _subcategoryService = subcategoryService;
 
     [HttpGet("getall")]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -18,7 +19,7 @@ public class CategoryController(ICategoryService categoryService) : ControllerBa
     {
         try
         {
-            var categories = await _categoryService.GetAll();
+            var categories = await _subcategoryService.GetAll();
             return Ok(categories);
         }
         catch (Exception ex)
@@ -32,7 +33,7 @@ public class CategoryController(ICategoryService categoryService) : ControllerBa
     {
         try
         {
-            var categories = await _categoryService.GetAllPaged(pageSize, pageNumber);
+            var categories = await _subcategoryService.GetAllPaged(pageSize, pageNumber);
             return Ok(categories);
         }
         catch (Exception ex)
@@ -46,7 +47,7 @@ public class CategoryController(ICategoryService categoryService) : ControllerBa
     {
         try
         {
-            var category = await _categoryService.GetById(id);
+            var category = await _subcategoryService.GetById(id);
             return Ok(category);
         }
         catch (ArgumentNullException ex)
@@ -60,11 +61,11 @@ public class CategoryController(ICategoryService categoryService) : ControllerBa
     }
 
     [HttpPost]
-    public async Task<IActionResult> Post(AddCategoryDto dto)
+    public async Task<IActionResult> Post(AddSubCategoryDto dto)
     {
         try
         {
-            await _categoryService.Add(dto);
+            await _subcategoryService.Add(dto);
             return Ok();
         }
         catch (ArgumentNullException ex) 
@@ -86,11 +87,11 @@ public class CategoryController(ICategoryService categoryService) : ControllerBa
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public  async Task<IActionResult> Put(UpdateCategoryDto dto)
+    public  async Task<IActionResult> Put(UpdateSubCategoryDto dto)
     {
         try
         {
-            await _categoryService.Update(dto);
+            await _subcategoryService.Update(dto);
             return Ok();
         }
         catch (ArgumentNullException ex)
@@ -112,7 +113,7 @@ public class CategoryController(ICategoryService categoryService) : ControllerBa
     {
         try
         {
-            await _categoryService.Delete(id);
+            await _subcategoryService.Delete(id);
             return Ok();
         }
         catch (ArgumentNullException ex)

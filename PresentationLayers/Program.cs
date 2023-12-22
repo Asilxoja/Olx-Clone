@@ -6,7 +6,6 @@ using DataAccesLayer.Interfaces;
 using DataAccesLayer.Repositories;
 using DTO;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,6 +39,7 @@ builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddTransient<ICategoryService, CategoryService>();
+builder.Services.AddTransient<ISubSubCategoryService, SubCategoryService>();
 #endregion 
 
 var mapperConfig = new MapperConfiguration(mc =>
